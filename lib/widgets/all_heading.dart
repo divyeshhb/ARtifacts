@@ -1,8 +1,8 @@
-import 'package:artif/screens/product_catalog.dart';
+import 'package:artif/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
-class FeaturedHeading extends StatefulWidget {
-  const FeaturedHeading({
+class AllHeading extends StatefulWidget {
+  const AllHeading({
     Key key,
     this.screenSize,
   }) : super(key: key);
@@ -10,10 +10,10 @@ class FeaturedHeading extends StatefulWidget {
   final Size screenSize;
 
   @override
-  _FeaturedHeadingState createState() => _FeaturedHeadingState();
+  _AllHeadingState createState() => _AllHeadingState();
 }
 
-class _FeaturedHeadingState extends State<FeaturedHeading> {
+class _AllHeadingState extends State<AllHeading> {
   bool isHovering = false;
 
   @override
@@ -29,7 +29,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Featured',
+            'All Products',
             style: TextStyle(
               fontSize: 40,
               fontFamily: 'Montserrat',
@@ -39,7 +39,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
           Row(
             children: [
               Text(
-                'Collection of Curated Artifacts | ',
+                'Check Out Every Product We Have To Offer | ',
                 textAlign: TextAlign.end,
                 style: TextStyle(
                   fontSize: 17,
@@ -47,7 +47,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
               ),
               InkWell(
                 child: Text(
-                  'All Products',
+                  'Featured Products',
                   textAlign: TextAlign.end,
                   style: TextStyle(
                     color: isHovering ? Colors.blue : Colors.black,
@@ -57,7 +57,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
                 onTap: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => ProductCatalog(),
+                      builder: (context) => HomePage(),
                     ),
                   );
                 },

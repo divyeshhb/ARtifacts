@@ -85,12 +85,11 @@ class _AuthDialogState extends State<AuthDialog> {
                   child: Text(
                     'ARtifacts',
                     style: TextStyle(
-                      color: Theme.of(context).textTheme.headline1.color,
-                      fontSize: 24,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 3,
-                    ),
+                        color: Theme.of(context).textTheme.headline1.color,
+                        fontSize: 24,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 3),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -270,8 +269,7 @@ class _AuthDialogState extends State<AuthDialog> {
                                 }).catchError((error) {
                                   print('Login Error: $error');
                                   setState(() {
-                                    loginStatus =
-                                        'Error occured while logging in';
+                                    loginStatus = 'Error: ${error.toString()}';
                                     loginStringColor = Colors.red;
                                   });
                                 });

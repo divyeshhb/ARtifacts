@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FeaturedTiles extends StatefulWidget {
-  FeaturedTiles({
+class AllTiles extends StatefulWidget {
+  AllTiles({
     Key key,
     @required this.screenSize,
   }) : super(key: key);
@@ -10,17 +10,14 @@ class FeaturedTiles extends StatefulWidget {
   final Size screenSize;
 
   @override
-  _FeaturedTilesState createState() => _FeaturedTilesState();
+  _AllTilesState createState() => _AllTilesState();
 }
 
-class _FeaturedTilesState extends State<FeaturedTiles> {
+class _AllTilesState extends State<AllTiles> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('Product')
-            .where('featured', isEqualTo: true)
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection('Product').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(

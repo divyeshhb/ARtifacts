@@ -1,26 +1,27 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
 import '../widgets/explore_drawer.dart';
-import '../widgets/featured_heading.dart';
-import '../widgets/featured_tiles.dart';
-import '../widgets/floating_quick_access_bar.dart';
+import '../widgets/all_heading.dart';
+import '../widgets/all_tiles.dart';
 
 import '../widgets/top_bar_contents.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class ProductCatalog extends StatefulWidget {
   static const String route = '/';
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _ProductCatalogState createState() => _ProductCatalogState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ProductCatalogState extends State<ProductCatalog> {
   double _opacity = 0;
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     _opacity = 1;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       extendBodyBehindAppBar: false,
@@ -33,36 +34,31 @@ class _HomePageState extends State<HomePage> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            Stack(
+            Column(
               children: [
                 Container(
                   child: SizedBox(
                     height: screenSize.height * 0.45,
                     width: screenSize.width,
                     child: Image.asset(
-                      'assets/cover.jpg',
+                      'assets/products.jpg',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    FloatingQuickAccessBar(screenSize: screenSize),
-                    Container(
-                      child: Column(
-                        children: [
-                          FeaturedHeading(
-                            screenSize: screenSize,
-                          ),
-                          SizedBox(
-                            height: screenSize.height * 0.05,
-                          ),
-                          FeaturedTiles(screenSize: screenSize)
-                        ],
+                Container(
+                  child: Column(
+                    children: [
+                      AllHeading(
+                        screenSize: screenSize,
                       ),
-                    ),
-                  ],
-                )
+                      SizedBox(
+                        height: screenSize.height * 0.05,
+                      ),
+                      AllTiles(screenSize: screenSize)
+                    ],
+                  ),
+                ),
               ],
             ),
             // SizedBox(height: screenSize.height / 8),

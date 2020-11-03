@@ -1,4 +1,4 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:artif/screens/product_catalog.dart';
 import '../screens/home_page.dart';
 import '../utils/authentication.dart';
 import '../widgets/auth_dialog.dart';
@@ -40,15 +40,24 @@ class _TopBarContentsState extends State<TopBarContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'ARtifacts',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 3,
+              GestureDetector(
+                child: Text(
+                  'ARtifacts',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 3,
+                  ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
+                },
               ),
               Expanded(
                 child: Row(
@@ -63,7 +72,13 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[0] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -76,17 +91,6 @@ class _TopBarContentsState extends State<TopBarContents> {
                             ),
                           ),
                           SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[0],
-                            child: Container(
-                              height: 2,
-                              width: 20,
-                              color: Colors.white,
-                            ),
-                          )
                         ],
                       ),
                     ),
@@ -99,12 +103,18 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[1] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => ProductCatalog(),
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Contact Us',
+                            'Catalog',
                             style: TextStyle(
                               color: _isHovering[1]
                                   ? Colors.blue[200]
@@ -112,35 +122,49 @@ class _TopBarContentsState extends State<TopBarContents> {
                             ),
                           ),
                           SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[1],
-                            child: Container(
-                              height: 2,
-                              width: 20,
-                              color: Colors.white,
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: screenSize.width / 20),
+                    InkWell(
+                      onHover: (value) {
+                        setState(() {
+                          value
+                              ? _isHovering[2] = true
+                              : _isHovering[2] = false;
+                        });
+                      },
+                      onTap: () {},
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Contact Us',
+                            style: TextStyle(
+                              color: _isHovering[2]
+                                  ? Colors.blue[200]
+                                  : Colors.white,
                             ),
-                          )
+                          ),
+                          SizedBox(height: 5),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              IconButton(
-                icon: Icon(Theme.of(context).brightness == Brightness.dark
-                    ? Icons.brightness_7
-                    : Icons.brightness_3),
-                color: Colors.white,
-                onPressed: () {
-                  DynamicTheme.of(context).setBrightness(
-                      Theme.of(context).brightness == Brightness.dark
-                          ? Brightness.light
-                          : Brightness.dark);
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Theme.of(context).brightness == Brightness.dark
+              //       ? Icons.brightness_7
+              //       : Icons.brightness_3),
+              //   color: Colors.white,
+              //   onPressed: () {
+              //     DynamicTheme.of(context).setBrightness(
+              //         Theme.of(context).brightness == Brightness.dark
+              //             ? Brightness.light
+              //             : Brightness.dark);
+              //   },
+              // ),
               SizedBox(
                 width: screenSize.width / 50,
               ),
@@ -162,7 +186,8 @@ class _TopBarContentsState extends State<TopBarContents> {
                     ? Text(
                         'Sign in',
                         style: TextStyle(
-                          color: _isHovering[3] ? Colors.white : Colors.white70,
+                          color:
+                              _isHovering[3] ? Colors.blue[200] : Colors.white,
                         ),
                       )
                     : Row(
