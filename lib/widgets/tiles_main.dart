@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FeaturedTiles extends StatefulWidget {
-  FeaturedTiles({
-    Key key,
-    @required this.screenSize,
-  }) : super(key: key);
+class TilesMain extends StatefulWidget {
+  TilesMain({Key key, @required this.screenSize, @required this.isFeatured})
+      : super(key: key);
 
   final Size screenSize;
+  final bool isFeatured;
 
   @override
-  _FeaturedTilesState createState() => _FeaturedTilesState();
+  _TilesMainState createState() => _TilesMainState();
 }
 
-class _FeaturedTilesState extends State<FeaturedTiles> {
+class _TilesMainState extends State<TilesMain> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('Product')
-            .where('featured', isEqualTo: true)
-            .snapshots(),
+        stream: widget.isFeatured
+            ? FirebaseFirestore.instance
+                .collection('Product')
+                .where('featured', isEqualTo: true)
+                .snapshots()
+            : FirebaseFirestore.instance.collection('Product').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -77,41 +78,5 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
             ),
           );
         });
-    // child: Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     ...Iterable<int>.generate(assets.length).map(
-    //       (int pageIndex) => Column(
-    //         children: [
-    //           SizedBox(
-    //             height: screenSize.width / 6,
-    //             width: screenSize.width / 3.8,
-    //             child: ClipRRect(
-    //               borderRadius: BorderRadius.circular(5.0),
-    //               child: Image.asset(
-    //                 assets[pageIndex],
-    //                 fit: BoxFit.cover,
-    //               ),
-    //             ),
-    //           ),
-    //           Padding(
-    //             padding: EdgeInsets.only(
-    //               top: screenSize.height / 70,
-    //             ),
-    //             child: Text(
-    //               title[pageIndex],
-    //               style: TextStyle(
-    //                 fontSize: 16,
-    //                 fontFamily: 'Montserrat',
-    //                 fontWeight: FontWeight.w500,
-    //                 color: Theme.of(context).primaryTextTheme.subtitle1.color,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ],
-    // ),
   }
 }

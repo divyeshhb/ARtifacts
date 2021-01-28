@@ -1,19 +1,26 @@
-import 'package:artif/screens/product_catalog.dart';
 import 'package:flutter/material.dart';
 
-class FeaturedHeading extends StatefulWidget {
-  const FeaturedHeading({
+class HeadingMain extends StatefulWidget {
+  const HeadingMain({
     Key key,
     this.screenSize,
+    this.title1,
+    this.title2,
+    this.title3,
+    this.onTap1,
   }) : super(key: key);
 
   final Size screenSize;
+  final String title1;
+  final String title2;
+  final String title3;
+  final Function onTap1;
 
   @override
-  _FeaturedHeadingState createState() => _FeaturedHeadingState();
+  _HeadingMainState createState() => _HeadingMainState();
 }
 
-class _FeaturedHeadingState extends State<FeaturedHeading> {
+class _HeadingMainState extends State<HeadingMain> {
   bool isHovering = false;
 
   @override
@@ -29,7 +36,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Featured',
+            widget.title1,
             style: TextStyle(
               fontSize: 40,
               fontFamily: 'Montserrat',
@@ -39,7 +46,7 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
           Row(
             children: [
               Text(
-                'Collection of Curated Artifacts | ',
+                widget.title2,
                 textAlign: TextAlign.end,
                 style: TextStyle(
                   fontSize: 17,
@@ -47,20 +54,14 @@ class _FeaturedHeadingState extends State<FeaturedHeading> {
               ),
               InkWell(
                 child: Text(
-                  'All Products',
+                  widget.title3,
                   textAlign: TextAlign.end,
                   style: TextStyle(
                     color: isHovering ? Colors.blue : Colors.black,
                     fontSize: 17,
                   ),
                 ),
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => ProductCatalog(),
-                    ),
-                  );
-                },
+                onTap: widget.onTap1,
                 onHover: (value) {
                   setState(() {
                     value ? isHovering = true : isHovering = false;

@@ -1,11 +1,13 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
-import '../widgets/explore_drawer.dart';
-import '../widgets/all_heading.dart';
-import '../widgets/all_tiles.dart';
+import 'package:artif/widgets/bottom_bar.dart';
+import 'package:artif/widgets/heading_main.dart';
+import 'package:artif/widgets/tiles_main.dart';
 
 import '../widgets/top_bar_contents.dart';
 import 'package:flutter/material.dart';
+
+import 'home_page.dart';
 
 class ProductCatalog extends StatefulWidget {
   static const String route = '/';
@@ -29,7 +31,6 @@ class _ProductCatalogState extends State<ProductCatalog> {
         preferredSize: Size(screenSize.width, 1000),
         child: TopBarContents(_opacity),
       ),
-      drawer: ExploreDrawer(),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
@@ -49,13 +50,22 @@ class _ProductCatalogState extends State<ProductCatalog> {
                 Container(
                   child: Column(
                     children: [
-                      AllHeading(
-                        screenSize: screenSize,
-                      ),
+                      HeadingMain(
+                          screenSize: screenSize,
+                          title1: 'All Products',
+                          title2: 'Check Out Every Product We Have To Offer |',
+                          title3: ' Featured Products',
+                          onTap1: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          }),
                       SizedBox(
                         height: screenSize.height * 0.05,
                       ),
-                      AllTiles(screenSize: screenSize)
+                      TilesMain(screenSize: screenSize, isFeatured: false)
                     ],
                   ),
                 ),
@@ -63,7 +73,7 @@ class _ProductCatalogState extends State<ProductCatalog> {
             ),
             // SizedBox(height: screenSize.height / 8),
             SizedBox(height: screenSize.height / 10),
-            // BottomBar(),
+            BottomBar(),
           ],
         ),
       ),

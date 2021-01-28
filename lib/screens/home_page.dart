@@ -1,8 +1,10 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
-import '../widgets/explore_drawer.dart';
-import '../widgets/featured_heading.dart';
-import '../widgets/featured_tiles.dart';
+import 'package:artif/screens/product_catalog.dart';
+import 'package:artif/widgets/bottom_bar.dart';
+import 'package:artif/widgets/heading_main.dart';
+import 'package:artif/widgets/tiles_main.dart';
+
 import '../widgets/floating_quick_access_bar.dart';
 
 import '../widgets/top_bar_contents.dart';
@@ -28,7 +30,6 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size(screenSize.width, 1000),
         child: TopBarContents(_opacity),
       ),
-      drawer: ExploreDrawer(),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
@@ -51,13 +52,22 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       child: Column(
                         children: [
-                          FeaturedHeading(
-                            screenSize: screenSize,
-                          ),
+                          HeadingMain(
+                              screenSize: screenSize,
+                              title1: 'Featured',
+                              title2: 'Collection of Curated Artifacts |',
+                              title3: ' All Products',
+                              onTap1: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductCatalog(),
+                                  ),
+                                );
+                              }),
                           SizedBox(
                             height: screenSize.height * 0.05,
                           ),
-                          FeaturedTiles(screenSize: screenSize)
+                          TilesMain(screenSize: screenSize, isFeatured: true)
                         ],
                       ),
                     ),
@@ -67,7 +77,7 @@ class _HomePageState extends State<HomePage> {
             ),
             // SizedBox(height: screenSize.height / 8),
             SizedBox(height: screenSize.height / 10),
-            // BottomBar(),
+            BottomBar(),
           ],
         ),
       ),
