@@ -32,6 +32,7 @@ dependencies:
   cloud_firestore: 
   responsive_framework: 
   carousel_slider:
+  flutter_countdown_timer:  
 dev_dependencies:
   flutter_test:
     sdk: flutter

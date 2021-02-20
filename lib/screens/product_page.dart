@@ -15,7 +15,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
-    //getProductDetails(widget.productId);
     super.initState();
   }
 
@@ -42,8 +41,120 @@ class _ProductPageState extends State<ProductPage> {
               );
             }
             var productDoc = snapshot.data;
-            return Container(
-              child: Text(productDoc['productName']),
+            return Column(
+              children: <Widget>[
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        Container(
+                          color: Theme.of(context)
+                              .bottomAppBarColor
+                              .withOpacity(0.5),
+                          height: screenSize.width * 0.38,
+                          padding: EdgeInsets.only(
+                            top: 0,
+                            left: 0,
+                          ),
+                          width: screenSize.width * 0.38,
+                          child: Center(
+                            child: Container(
+                              height: screenSize.width * 0.35,
+                              // padding: EdgeInsets.only(
+                              //   top: screenSize.width * 0.02,
+                              //   left: screenSize.width * 0.02,
+                              //   bottom: screenSize.width * 0.02,
+                              //   right: screenSize.width * 0.02,
+                              // ),
+                              width: screenSize.width * 0.35,
+                              child: Image.network(
+                                snapshot.data['productImageUrl'],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text(
+                            snapshot.data['productName'],
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .subtitle1
+                                  .color,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'INR ${snapshot.data['basePrice']} ',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .subtitle1
+                                .color,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: screenSize.width * 0.5,
+                          child: Text(
+                            snapshot.data['shortDesc'],
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Montserrat',
+                              // fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .subtitle1
+                                  .color,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: screenSize.width * 0.5,
+                          child: Text(
+                            'Details: \n${snapshot.data['longDesc']}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Montserrat',
+                              // fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .subtitle1
+                                  .color,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             );
           }),
     );
