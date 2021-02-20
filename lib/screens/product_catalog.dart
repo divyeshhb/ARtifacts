@@ -1,6 +1,5 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
-import 'package:artif/widgets/bottom_bar.dart';
 import 'package:artif/widgets/heading_main.dart';
 import 'package:artif/widgets/tiles_main.dart';
 
@@ -73,7 +72,7 @@ class _ProductCatalogState extends State<ProductCatalog> {
             ),
             // SizedBox(height: screenSize.height / 8),
             SizedBox(height: screenSize.height / 10),
-            BottomBar(),
+            // BottomBar(),
           ],
         ),
       ),

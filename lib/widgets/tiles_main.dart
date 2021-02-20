@@ -1,3 +1,4 @@
+import 'package:artif/widgets/tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -39,41 +40,9 @@ class _TilesMainState extends State<TilesMain> {
               shrinkWrap: true,
               itemCount: snapshot.data.docs.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, childAspectRatio: 3 / 2.5),
+                  crossAxisCount: 3, childAspectRatio: 3 / 3.5),
               itemBuilder: (context, index) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: widget.screenSize.width / 6,
-                      width: widget.screenSize.width / 3.8,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.0),
-                        child: Image.network(
-                          snapshot.data.docs[index]['productImageUrl'],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: widget.screenSize.height / 70,
-                      ),
-                      child: Text(
-                        snapshot.data.docs[index]['productName'],
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .subtitle1
-                              .color,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
+                return TileCard(snapshot, widget.screenSize, index);
               },
             ),
           );

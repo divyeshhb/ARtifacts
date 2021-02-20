@@ -40,7 +40,7 @@ class _TopBarContentsState extends State<TopBarContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GestureDetector(
+              MaterialButton(
                 child: Text(
                   'ARtifacts',
                   style: TextStyle(
@@ -51,7 +51,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                     letterSpacing: 3,
                   ),
                 ),
-                onTap: () {
+                onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => HomePage(),
@@ -63,7 +63,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: screenSize.width / 8),
+                    SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
                         setState(() {
@@ -85,12 +85,13 @@ class _TopBarContentsState extends State<TopBarContents> {
                           Text(
                             'Discover',
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: _isHovering[0]
                                   ? Colors.blue[200]
                                   : Colors.white,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          // SizedBox(height: 5),
                         ],
                       ),
                     ),
@@ -116,12 +117,13 @@ class _TopBarContentsState extends State<TopBarContents> {
                           Text(
                             'Catalog',
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: _isHovering[1]
                                   ? Colors.blue[200]
                                   : Colors.white,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          // SizedBox(height: 5),
                         ],
                       ),
                     ),
@@ -141,12 +143,13 @@ class _TopBarContentsState extends State<TopBarContents> {
                           Text(
                             'Contact Us',
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: _isHovering[2]
                                   ? Colors.blue[200]
                                   : Colors.white,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          //SizedBox(height: 5),
                         ],
                       ),
                     ),
@@ -208,6 +211,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                           Text(
                             name ?? userEmail,
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: _isHovering[3]
                                   ? Colors.white
                                   : Colors.white70,
@@ -252,6 +256,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                   : Text(
                                       'Sign out',
                                       style: TextStyle(
+                                        fontFamily: 'Montserrat',
                                         fontSize: 14,
                                         color: Colors.white,
                                       ),

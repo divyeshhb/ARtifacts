@@ -1,7 +1,6 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
 import 'package:artif/screens/product_catalog.dart';
-import 'package:artif/widgets/bottom_bar.dart';
 import 'package:artif/widgets/heading_main.dart';
 import 'package:artif/widgets/tiles_main.dart';
 
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         child: TopBarContents(_opacity),
       ),
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        //physics: ClampingScrollPhysics(),
         child: Column(
           children: [
             Stack(
@@ -77,7 +76,7 @@ class _HomePageState extends State<HomePage> {
             ),
             // SizedBox(height: screenSize.height / 8),
             SizedBox(height: screenSize.height / 10),
-            BottomBar(),
+            // BottomBar(),
           ],
         ),
       ),

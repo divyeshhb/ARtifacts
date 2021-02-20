@@ -1,5 +1,4 @@
 import './bottom_bar_column.dart';
-import './info_text.dart';
 
 import 'package:flutter/material.dart';
 
@@ -42,20 +41,20 @@ class BottomBar extends StatelessWidget {
                 width: 2,
                 height: 150,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InfoText(
-                    type: 'Email',
-                    text: 'explore@gmail.com',
-                  ),
-                  SizedBox(height: 5),
-                  InfoText(
-                    type: 'Address',
-                    text: '128, Trymore Road, Delft, MN - 56124',
-                  )
-                ],
-              ),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     InfoText(
+              //       type: 'Email',
+              //       text: 'explore@gmail.com',
+              //     ),
+              //     SizedBox(height: 5),
+              //     InfoText(
+              //       type: 'Address',
+              //       text: '128, Trymore Road, Delft, MN - 56124',
+              //     )
+              //   ],
+              // ),
             ],
           ),
           Padding(
