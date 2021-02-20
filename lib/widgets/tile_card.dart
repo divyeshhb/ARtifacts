@@ -120,30 +120,62 @@ class _TileCardState extends State<TileCard> {
                         bottomRight: Radius.circular(20)),
                     child: Container(
                       padding: EdgeInsets.only(
-                        top: 7,
-                        left: 9,
-                        bottom: 7,
+                        top: 14,
+                        left: 18,
+                        right: 18,
+                        bottom: 14,
                       ),
                       color: Colors.black,
                       height: widget.screenSize.width / 20,
                       width: widget.screenSize.width / 4.4,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
                                 'Current Bid',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                  fontSize: 16,
+                                  fontFamily: 'Montserrat',
+                                  // fontWeight: FontWeight.bold,
+                                  color: Colors.white54,
+                                ),
                               ),
-                              // Text(),
+                              Text(
+                                'INR 69000',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                           Column(
-                            children: <Widget>[],
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Ends in',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Montserrat',
+                                  // fontWeight: FontWeight.bold,
+                                  color: Colors.white54,
+                                ),
+                              ),
+                              Text(
+                                '23h 36m 29s',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'Montserrat',
+                                  // fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

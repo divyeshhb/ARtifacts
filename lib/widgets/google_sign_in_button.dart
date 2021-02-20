@@ -20,7 +20,7 @@ class _GoogleButtonState extends State<GoogleButton> {
         ),
         color: Colors.white,
       ),
-      child: OutlineButton(
+      child: MaterialButton(
         highlightColor: Colors.blueGrey[100],
         splashColor: Colors.blueGrey[200],
         onPressed: () async {

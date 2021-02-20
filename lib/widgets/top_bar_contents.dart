@@ -218,7 +218,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                             ),
                           ),
                           SizedBox(width: 10),
-                          FlatButton(
+                          MaterialButton(
                             color: Colors.blueGrey,
                             hoverColor: Colors.blueGrey[700],
                             highlightColor: Colors.blueGrey[800],

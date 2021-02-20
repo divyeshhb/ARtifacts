@@ -30,7 +30,6 @@ dependencies:
   google_sign_in:
   google_sign_in_web:   
   cloud_firestore: 
-  dynamic_theme:
   responsive_framework: 
   carousel_slider:
 dev_dependencies:
