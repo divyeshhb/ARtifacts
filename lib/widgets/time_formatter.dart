@@ -72,19 +72,31 @@ class _CountDownTimerState extends State<CountDownTimer>
   }
 
   String formatHHMMSS(int seconds) {
+    // int hours = (seconds / 3600).truncate();
+    // seconds = (seconds % 3600).truncate();
+    // int minutes = (seconds / 60).truncate();
+    // int days = (seconds / 86400).truncate();
+
+    int days = (seconds / 86400).truncate();
+    seconds = (seconds % 86400).truncate();
     int hours = (seconds / 3600).truncate();
     seconds = (seconds % 3600).truncate();
     int minutes = (seconds / 60).truncate();
 
+    String daysStr = (days).toString().padLeft(2, '0');
     String hoursStr = (hours).toString().padLeft(2, '0');
     String minutesStr = (minutes).toString().padLeft(2, '0');
     String secondsStr = (seconds % 60).toString().padLeft(2, '0');
 
-    if (hours == 0) {
-      return "$minutesStr:$secondsStr";
+    if (days == 0) {
+      return "${hoursStr}h ${minutesStr}m ${secondsStr}s";
     }
 
-    return "${hoursStr}h ${minutesStr}m ${secondsStr}s";
+    if (hours == 0) {
+      return "${minutesStr}m ${secondsStr}s";
+    }
+
+    return "${daysStr}d ${hoursStr}h ${minutesStr}m ${secondsStr}s";
   }
 
   @override

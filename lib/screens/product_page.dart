@@ -1,12 +1,19 @@
+import 'package:artif/screens/product_catalog.dart';
+import 'package:artif/widgets/product_right.dart';
+
+import '../widgets/my_button.dart';
+import 'package:artif/widgets/time_formatter.dart';
 import 'package:flutter/material.dart';
 import '../widgets/top_bar_contents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
-  ProductPage(
-    this.productId,
-  );
+  final String status;
+  final int index;
+  final dynamic snap;
+  ProductPage(this.productId, this.status, this.snap, this.index);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -15,7 +22,18 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
+    getTimeStatus();
     super.initState();
+  }
+
+  final currencyFormat = NumberFormat("#,##0.00", "en_US");
+  var differenceS;
+  var differenceE;
+  getTimeStatus() {
+    Timestamp s = widget.snap.data.docs[widget.index]['startDate'];
+    Timestamp e = widget.snap.data.docs[widget.index]['endDate'];
+    differenceS = s.toDate().difference(DateTime.now()).inSeconds;
+    differenceE = e.toDate().difference(DateTime.now()).inSeconds;
   }
 
   @override
@@ -40,121 +58,240 @@ class _ProductPageState extends State<ProductPage> {
                 child: CircularProgressIndicator(),
               );
             }
-            var productDoc = snapshot.data;
-            return Column(
-              children: <Widget>[
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            //var productDoc = snapshot.data;
+            return Container(
+              color: Color(0xFFf0f0f0),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
                   children: <Widget>[
-                    Column(
-                      children: [
-                        Container(
-                          color: Theme.of(context)
-                              .bottomAppBarColor
-                              .withOpacity(0.5),
-                          height: screenSize.width * 0.38,
-                          padding: EdgeInsets.only(
-                            top: 0,
-                            left: 0,
-                          ),
-                          width: screenSize.width * 0.38,
-                          child: Center(
-                            child: Container(
-                              height: screenSize.width * 0.35,
-                              // padding: EdgeInsets.only(
-                              //   top: screenSize.width * 0.02,
-                              //   left: screenSize.width * 0.02,
-                              //   bottom: screenSize.width * 0.02,
-                              //   right: screenSize.width * 0.02,
-                              // ),
-                              width: screenSize.width * 0.35,
-                              child: Image.network(
-                                snapshot.data['productImageUrl'],
-                                fit: BoxFit.cover,
-                              ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xFFfbfbfb),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                // Expanded(flex: 1, child: appBar()),
+                                Expanded(
+                                  flex: 5,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            image: NetworkImage(snapshot
+                                                .data['productImageUrl']),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey,
+                                              //offset: Offset(0.0, 1.0), //(x,y)
+                                              blurRadius: 5.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                    flex: 3,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            // top: 25,
+                                            left: 20,
+                                            right: 20,
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    widget.status ==
+                                                            "will_start"
+                                                        ? 'Current Bid'
+                                                        : widget.status ==
+                                                                'in_progress'
+                                                            ? 'Current Bid'
+                                                            : 'Sold for',
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontFamily: 'Montserrat',
+                                                      // fontWeight: FontWeight.bold,
+                                                      // color: Colors.white60,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    widget.status ==
+                                                            "will_start"
+                                                        ? 'Starting Soon'
+                                                        : widget.status ==
+                                                                'in_progress'
+                                                            ? 'INR ${currencyFormat.format(double.parse((snapshot.data["currentBid"])))}'
+                                                            //: 'INR ${currencyFormat.format(double.parse((widget.snapshot.data.docs[widget.index]["finalPrice"])))}',
+                                                            : 'INR 20,000.00',
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontFamily: 'Montserrat',
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      // color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    widget.status ==
+                                                            "will_start"
+                                                        ? 'Starts in'
+                                                        : widget.status ==
+                                                                'in_progress'
+                                                            ? 'Ends in'
+                                                            : 'Ended',
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontFamily: 'Montserrat',
+                                                      // fontWeight: FontWeight.bold,
+                                                      // color: Colors.white60,
+                                                    ),
+                                                  ),
+                                                  widget.status == 'ended'
+                                                      ? Text(
+                                                          '-',
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            // color: Colors.white,
+                                                          ),
+                                                        )
+                                                      : CountDownTimer(
+                                                          secondsRemaining: widget
+                                                                      .status ==
+                                                                  'will_start'
+                                                              ? differenceS
+                                                              : widget.status ==
+                                                                      'in_progress'
+                                                                  ? differenceE
+                                                                  : 0,
+                                                          whenTimeExpires:
+                                                              () {},
+                                                          countDownTimerStyle:
+                                                              TextStyle(
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            // color: Colors.white,
+                                                          ),
+                                                        ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Column(
+                                          children: [
+                                            widget.status == 'will_start'
+                                                ? MyButton(
+                                                    name: ' Notify Me',
+                                                    icon: Icons.notifications,
+                                                    onPressed: () {
+                                                      //notify
+                                                    },
+                                                  )
+                                                : widget.status == 'in_progress'
+                                                    ? MyButton(
+                                                        name: 'Place Bid',
+                                                        icon:
+                                                            Icons.attach_money,
+                                                        onPressed: () {
+                                                          //open bid
+                                                        },
+                                                      )
+                                                    : MyButton(
+                                                        name: ' Go to Catalog',
+                                                        icon:
+                                                            Icons.shopping_cart,
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pushReplacement(
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProductCatalog(),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            MyButton(
+                                              name: ' View in AR',
+                                              icon: Icons
+                                                  .play_circle_outline_outlined,
+                                              onPressed: () {},
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ))
+                              ],
                             ),
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Text(
-                            snapshot.data['productName'],
-                            style: TextStyle(
-                              fontSize: 36,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .subtitle1
-                                  .color,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'INR ${snapshot.data['basePrice']} ',
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context)
-                                .primaryTextTheme
-                                .subtitle1
-                                .color,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: screenSize.width * 0.5,
-                          child: Text(
-                            snapshot.data['shortDesc'],
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Montserrat',
-                              // fontWeight: FontWeight.bold,
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .subtitle1
-                                  .color,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: screenSize.width * 0.5,
-                          child: Text(
-                            'Details: \n${snapshot.data['longDesc']}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Montserrat',
-                              // fontWeight: FontWeight.bold,
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .subtitle1
-                                  .color,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0xFFfbfbfb),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: ProductRight(
+                                productId: widget.productId,
+                              )),
+                        ))
                   ],
                 ),
-              ],
+              ),
             );
           }),
     );

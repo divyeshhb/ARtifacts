@@ -67,8 +67,11 @@ class _TileCardState extends State<TileCard> {
           onTap: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) =>
-                    ProductPage(widget.snapshot.data.docs[widget.index].id),
+                builder: (context) => ProductPage(
+                    widget.snapshot.data.docs[widget.index].id,
+                    status,
+                    widget.snapshot,
+                    widget.index),
               ),
             );
           },

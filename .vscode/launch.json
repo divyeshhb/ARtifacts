@@ -8,7 +8,7 @@
             "name": "artif",
             "request": "launch",
             "type": "dart",
-            "args": ["--web-port", "7357"]
+            "args": ["--web-port", "7357","--web-renderer","html"]
         }
     ]
 }
