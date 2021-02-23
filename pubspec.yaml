@@ -32,7 +32,9 @@ dependencies:
   cloud_firestore: 
   responsive_framework: 
   carousel_slider:
-  flutter_countdown_timer:  
+  flutter_countdown_timer: 
+  qr_flutter: 
+  firebase_dynamic_links:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,6 +49,7 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-Bold.ttf
 
     - family: Electrolize
       fonts:

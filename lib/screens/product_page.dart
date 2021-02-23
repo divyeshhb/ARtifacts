@@ -1,12 +1,14 @@
 import 'package:artif/screens/product_catalog.dart';
 import 'package:artif/widgets/product_right.dart';
-
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import '../widgets/my_button.dart';
 import 'package:artif/widgets/time_formatter.dart';
 import 'package:flutter/material.dart';
 import '../widgets/top_bar_contents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -20,9 +22,11 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  //var arUrl;
   @override
   void initState() {
     getTimeStatus();
+    //arUrl = await createDynamicLink(widget.productId);
     super.initState();
   }
 
@@ -34,6 +38,68 @@ class _ProductPageState extends State<ProductPage> {
     Timestamp e = widget.snap.data.docs[widget.index]['endDate'];
     differenceS = s.toDate().difference(DateTime.now()).inSeconds;
     differenceE = e.toDate().difference(DateTime.now()).inSeconds;
+  }
+
+  openQrCode(var snapshot) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'View This Artifact in AR',
+              style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+            ],
+            actionsPadding: EdgeInsets.symmetric(horizontal: 8.0),
+            content: Container(
+              width: 400,
+              height: 450,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        color: Colors.white70,
+                        elevation: 6.0,
+                        child: QrImage(
+                          data: 'https://google.com',
+                          version: QrVersions.auto,
+                          size: 300.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    '1. Scan this QR code.\n2. You will be redirected to the Appstore.\n3. Once the app is downloaded, you will be taken to the AR View automatically.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -265,7 +331,9 @@ class _ProductPageState extends State<ProductPage> {
                                               name: ' View in AR',
                                               icon: Icons
                                                   .play_circle_outline_outlined,
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                openQrCode(snapshot);
+                                              },
                                             ),
                                           ],
                                         ),

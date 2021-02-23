@@ -116,7 +116,7 @@ class _ProductRightState extends State<ProductRight> {
                             fontSize: 15,
                             color: Color(0xFF333333),
                             fontFamily: "Montserrat",
-                            // fontWeight: FontWeight,
+                            // fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
