@@ -1,14 +1,14 @@
 import 'package:artif/screens/product_catalog.dart';
 import 'package:artif/widgets/product_right.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+// import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import '../widgets/my_button.dart';
 import 'package:artif/widgets/time_formatter.dart';
 import 'package:flutter/material.dart';
 import '../widgets/top_bar_contents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'dart:async';
+// import 'dart:async';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -76,7 +76,7 @@ class _ProductPageState extends State<ProductPage> {
                         color: Colors.white70,
                         elevation: 6.0,
                         child: QrImage(
-                          data: 'https://google.com',
+                          data: '${snapshot.data.id}',
                           version: QrVersions.auto,
                           size: 300.0,
                         ),
@@ -87,7 +87,7 @@ class _ProductPageState extends State<ProductPage> {
                     height: 15,
                   ),
                   Text(
-                    '1. Scan this QR code.\n2. You will be redirected to the Appstore.\n3. Once the app is downloaded, you will be taken to the AR View automatically.',
+                    '1. Download the ARtifacts app from Playstore / Appstore.\n2. Scan this QR code inside the app.\n3. Place the product in the AR view.',
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Montserrat',

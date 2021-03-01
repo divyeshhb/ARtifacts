@@ -125,7 +125,7 @@ class _TileCardState extends State<TileCard> {
                           style: TextStyle(
                             fontSize: 22,
                             fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w900,
                             color: Theme.of(context)
                                 .primaryTextTheme
                                 .subtitle1
@@ -231,7 +231,7 @@ class _TileCardState extends State<TileCard> {
                                       countDownTimerStyle: TextStyle(
                                         fontSize: 18,
                                         fontFamily: 'Montserrat',
-                                        // fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                         color: Colors.white,
                                       ),
                                     ),
