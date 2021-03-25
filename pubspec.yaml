@@ -35,6 +35,7 @@ dependencies:
   flutter_countdown_timer: 
   qr_flutter: 
   firebase_dynamic_links:
+  flutter_masked_text:
 dev_dependencies:
   flutter_test:
     sdk: flutter

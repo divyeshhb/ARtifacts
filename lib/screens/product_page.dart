@@ -1,7 +1,10 @@
 import 'package:artif/screens/product_catalog.dart';
+import 'package:artif/utils/authentication.dart';
+import 'package:artif/widgets/auth_dialog.dart';
 import 'package:artif/widgets/product_right.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 // import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import '../bid_function.dart';
 import '../widgets/my_button.dart';
 import 'package:artif/widgets/time_formatter.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     getTimeStatus();
+    getUserInfo();
     //arUrl = await createDynamicLink(widget.productId);
     super.initState();
   }
@@ -100,6 +104,23 @@ class _ProductPageState extends State<ProductPage> {
             ),
           );
         });
+  }
+
+  Future getUserInfo() async {
+    await getUser();
+    setState(() {});
+    print(uid);
+  }
+
+  placeBid() async {
+    if (uid != null) {
+      openBidDialog(widget.productId, context, uid);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AuthDialog(),
+      );
+    }
   }
 
   @override
@@ -307,14 +328,14 @@ class _ProductPageState extends State<ProductPage> {
                                                         icon:
                                                             Icons.attach_money,
                                                         onPressed: () {
-                                                          //open bid
+                                                          placeBid();
                                                         },
                                                       )
                                                     : MyButton(
                                                         name: ' Go to Catalog',
                                                         icon:
                                                             Icons.shopping_cart,
-                                                        onPressed: () {
+                                                        onPressed: () async {
                                                           Navigator.of(context)
                                                               .pushReplacement(
                                                             MaterialPageRoute(

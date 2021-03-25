@@ -75,13 +75,25 @@ class _ProductRightState extends State<ProductRight> {
                                 ),
                                 child: Container(
                                   child: Center(
-                                    child: Text(
-                                      '# ${snapshot.data['tags'][index]}',
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        ImageIcon(
+                                          AssetImage('assets/tag.png'),
+                                          size: 15,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '${snapshot.data['tags'][index]}',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
