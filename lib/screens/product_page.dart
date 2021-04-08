@@ -241,7 +241,7 @@ class _ProductPageState extends State<ProductPage> {
                                                                 'in_progress'
                                                             ? 'INR ${currencyFormat.format(double.parse((snapshot.data["currentBid"])))}'
                                                             //: 'INR ${currencyFormat.format(double.parse((widget.snapshot.data.docs[widget.index]["finalPrice"])))}',
-                                                            : 'INR 20,000.00',
+                                                            : 'INR ${currencyFormat.format(double.parse((snapshot.data["currentBid"])))}',
                                                     style: TextStyle(
                                                       fontSize: 18,
                                                       fontFamily: 'Montserrat',

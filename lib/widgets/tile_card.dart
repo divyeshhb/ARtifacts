@@ -185,7 +185,7 @@ class _TileCardState extends State<TileCard> {
                                     : status == 'in_progress'
                                         ? 'INR ${currencyFormat.format(double.parse((widget.snapshot.data.docs[widget.index]["currentBid"])))}'
                                         //: 'INR ${currencyFormat.format(double.parse((widget.snapshot.data.docs[widget.index]["finalPrice"])))}',
-                                        : 'INR 20,000.00',
+                                        : 'INR ${currencyFormat.format(double.parse((widget.snapshot.data.docs[widget.index]["currentBid"])))}',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontFamily: 'Montserrat',

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +6,7 @@ import 'package:intl/intl.dart';
 
 final currencyFormat = NumberFormat("#,##0.00", "en_US");
 
-placeBid(String productId, snapshot, String uid, double bidAmt) async {
+placeBid(String productId, snapshot, String uid, double bidAmt, context) async {
   if (bidAmt > double.parse(snapshot.data['currentBid'])) {
     var docs = await FirebaseFirestore.instance
         .collection('Product')
@@ -32,6 +31,7 @@ placeBid(String productId, snapshot, String uid, double bidAmt) async {
         'currentBid': bidAmt.toString(),
       });
     }
+    Navigator.of(context).pop();
   }
 }
 
@@ -91,12 +91,35 @@ openBidDialog(productId, context, uid) {
                     children: [
                       Text(
                           'Current Bid: INR ${currencyFormat.format(double.parse((snapshot.data["currentBid"])))}'),
-                      TextField(
-                        enabled: false,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 8,
+                            child: TextField(
+                              enabled: false,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]')),
+                              ],
+                              controller: textEditingController,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: () {
+                                textEditingController.updateValue(double.parse(
+                                    (snapshot.data["currentBid"])));
+                              },
+                              child: Text(
+                                'clear',
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
-                        controller: textEditingController,
                       ),
                       Row(
                         children: [
@@ -121,7 +144,7 @@ openBidDialog(productId, context, uid) {
                         highlightColor: Colors.blueGrey[800],
                         onPressed: () async {
                           await placeBid(productId, snapshot, uid,
-                              textEditingController.numberValue);
+                              textEditingController.numberValue, context);
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
