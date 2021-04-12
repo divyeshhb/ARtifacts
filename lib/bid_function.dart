@@ -21,6 +21,19 @@ placeBid(String productId, snapshot, String uid, double bidAmt, context) async {
         ],
         'currentBid': bidAmt.toString(),
       });
+      var userDoc =
+          await FirebaseFirestore.instance.collection('User').doc(uid).get();
+      if (!userDoc.data().containsKey('myBids')) {
+        FirebaseFirestore.instance.collection('User').doc(uid).update({
+          'myBids': [productId],
+        });
+      } else {
+        if (!userDoc.data()['myBids'].contains(productId)) {
+          FirebaseFirestore.instance.collection('User').doc(uid).update({
+            'myBids': FieldValue.arrayUnion([productId]),
+          });
+        }
+      }
     } else {
       FirebaseFirestore.instance.collection('Product').doc(productId).update({
         'bids': FieldValue.arrayUnion([
@@ -30,6 +43,19 @@ placeBid(String productId, snapshot, String uid, double bidAmt, context) async {
         ]),
         'currentBid': bidAmt.toString(),
       });
+    }
+    var userDoc =
+        await FirebaseFirestore.instance.collection('User').doc(uid).get();
+    if (!userDoc.data().containsKey('myBids')) {
+      FirebaseFirestore.instance.collection('User').doc(uid).update({
+        'myBids': [productId],
+      });
+    } else {
+      if (!userDoc.data()['myBids'].contains(productId)) {
+        FirebaseFirestore.instance.collection('User').doc(uid).update({
+          'myBids': FieldValue.arrayUnion([productId]),
+        });
+      }
     }
     Navigator.of(context).pop();
   }

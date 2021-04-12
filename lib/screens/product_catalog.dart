@@ -1,5 +1,6 @@
 // import 'package:dynamic_theme/dynamic_theme.dart';
 // import '../widgets/web_scrollbar.dart';
+import 'package:artif/widgets/floating_quick_access_bar.dart';
 import 'package:artif/widgets/heading_main.dart';
 import 'package:artif/widgets/tiles_main.dart';
 
@@ -34,7 +35,7 @@ class _ProductCatalogState extends State<ProductCatalog> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            Column(
+            Stack(
               children: [
                 Container(
                   child: SizedBox(
@@ -49,10 +50,11 @@ class _ProductCatalogState extends State<ProductCatalog> {
                 Container(
                   child: Column(
                     children: [
+                      FloatingQuickAccessBar(screenSize: screenSize),
                       HeadingMain(
                           screenSize: screenSize,
                           title1: 'All Products',
-                          title2: 'Check Out Every Product We Have To Offer |',
+                          title2: 'Check Out Item Product We Have To Offer |',
                           title3: ' Featured Products',
                           onTap1: () {
                             Navigator.of(context).pushReplacement(

@@ -1,3 +1,4 @@
+import 'package:artif/screens/category_page.dart';
 import 'package:flutter/material.dart';
 
 class FloatingQuickAccessBar extends StatefulWidget {
@@ -16,13 +17,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
   List _isHovering = [false, false, false, false];
   List<Widget> rowElements = [];
 
-  List<String> items = ['Paintings', 'Sculptures', 'Mystery Boxes', 'Coins'];
-  List<IconData> icons = [
-    Icons.location_on,
-    Icons.date_range,
-    Icons.people,
-    Icons.wb_sunny
-  ];
+  List<String> items = ['Paintings', 'Sculptures', 'Vases', 'Collectibles'];
 
   List<Widget> generateRowElements() {
     rowElements.clear();
@@ -35,10 +30,20 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
             value ? _isHovering[i] = true : _isHovering[i] = false;
           });
         },
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) {
+            return CategoryCatalog(
+              category:
+                  '${items[i].substring(0, items[i].length - 1).toLowerCase()}',
+              categoryName: items[i],
+            );
+          }));
+        },
         child: Text(
           items[i],
           style: TextStyle(
+            fontFamily: 'Montserrat',
             color: _isHovering[i]
                 ? Theme.of(context).primaryTextTheme.button.decorationColor
                 : Theme.of(context).primaryTextTheme.button.color,

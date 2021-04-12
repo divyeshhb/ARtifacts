@@ -80,7 +80,7 @@ Future<String> signInWithGoogle() async {
 
     final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
     final snapShot =
-        await _fireStore.collection('users').doc(currentUser.uid).get();
+        await _fireStore.collection('User').doc(currentUser.uid).get();
 
     if (snapShot == null || !snapShot.exists) {
       // Document with id == docId doesn't exist.
@@ -126,7 +126,7 @@ Future<String> registerWithEmailPassword(String email, String password) async {
     assert(await user.getIdToken() != null);
 
     final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-    final snapShot = await _fireStore.collection('users').doc(user.uid).get();
+    final snapShot = await _fireStore.collection('User').doc(user.uid).get();
 
     if (snapShot == null || !snapShot.exists) {
       // Document with id == docId doesn't exist.

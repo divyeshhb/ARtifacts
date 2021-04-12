@@ -78,9 +78,11 @@ class _CountDownTimerState extends State<CountDownTimer>
     // int days = (seconds / 86400).truncate();
 
     int days = (seconds / 86400).truncate();
-    seconds = (seconds % 86400).truncate();
+    seconds = seconds - (days * 86400);
+
     int hours = (seconds / 3600).truncate();
-    seconds = (seconds % 3600).truncate();
+    seconds = seconds - (hours * 3600);
+
     int minutes = (seconds / 60).truncate();
 
     String daysStr = (days).toString().padLeft(2, '0');
@@ -92,7 +94,7 @@ class _CountDownTimerState extends State<CountDownTimer>
       return "${hoursStr}h ${minutesStr}m ${secondsStr}s";
     }
 
-    if (hours == 0) {
+    if (hours == 0 && days == 0) {
       return "${minutesStr}m ${secondsStr}s";
     }
 

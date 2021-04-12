@@ -1,3 +1,4 @@
+import 'package:artif/screens/category_page.dart';
 import 'package:artif/widgets/history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -75,7 +76,16 @@ class _ProductRightState extends State<ProductRight> {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(builder: (context) {
+                                      return CategoryCatalog(
+                                        category: snapshot.data['tags'][index],
+                                        categoryName:
+                                            '${snapshot.data['tags'][index].substring(0, 1).toUpperCase()}${snapshot.data['tags'][index].substring(1, snapshot.data['tags'][index].length)}s',
+                                      );
+                                    }));
+                                  },
                                   color: Colors.blueGrey,
                                   hoverColor: Colors.blueGrey[700],
                                   highlightColor: Colors.blueGrey[800],

@@ -1,5 +1,5 @@
-import '../screens/home_page.dart';
-import '../utils/authentication.dart';
+// import '../screens/home_page.dart';
+// import '../utils/authentication.dart';
 import 'package:flutter/material.dart';
 
 import 'google_sign_in_button.dart';
@@ -12,46 +12,46 @@ class AuthDialog extends StatefulWidget {
 class _AuthDialogState extends State<AuthDialog> {
   TextEditingController textControllerEmail;
   FocusNode textFocusNodeEmail;
-  bool _isEditingEmail = false;
+  // bool _isEditingEmail = false;
 
   TextEditingController textControllerPassword;
   FocusNode textFocusNodePassword;
-  bool _isEditingPassword = false;
+  // bool _isEditingPassword = false;
 
-  bool _isRegistering = false;
-  bool _isLoggingIn = false;
+  // bool _isRegistering = false;
+  // bool _isLoggingIn = false;
 
   String loginStatus;
   Color loginStringColor = Colors.green;
 
-  String _validateEmail(String value) {
-    value = value.trim();
+  // String _validateEmail(String value) {
+  //   value = value.trim();
 
-    if (textControllerEmail.text != null) {
-      if (value.isEmpty) {
-        return 'Email can\'t be empty';
-      } else if (!value.contains(RegExp(
-          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
-        return 'Enter a correct email address';
-      }
-    }
+  //   if (textControllerEmail.text != null) {
+  //     if (value.isEmpty) {
+  //       return 'Email can\'t be empty';
+  //     } else if (!value.contains(RegExp(
+  //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+  //       return 'Enter a correct email address';
+  //     }
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  String _validatePassword(String value) {
-    value = value.trim();
+  // String _validatePassword(String value) {
+  //   value = value.trim();
 
-    if (textControllerEmail.text != null) {
-      if (value.isEmpty) {
-        return 'Password can\'t be empty';
-      } else if (value.length < 6) {
-        return 'Length of password should be greater than 6';
-      }
-    }
+  //   if (textControllerEmail.text != null) {
+  //     if (value.isEmpty) {
+  //       return 'Password can\'t be empty';
+  //     } else if (value.length < 6) {
+  //       return 'Length of password should be greater than 6';
+  //     }
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _AuthDialogState extends State<AuthDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.blueGrey[900],
+      backgroundColor: Colors.blueGrey[800],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -76,7 +76,7 @@ class _AuthDialogState extends State<AuthDialog> {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             width: 400,
-            color: Colors.blueGrey[900],
+            color: Colors.blueGrey[800],
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,

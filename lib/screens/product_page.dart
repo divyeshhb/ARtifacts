@@ -42,6 +42,8 @@ class _ProductPageState extends State<ProductPage> {
     Timestamp e = widget.snap.data.docs[widget.index]['endDate'];
     differenceS = s.toDate().difference(DateTime.now()).inSeconds;
     differenceE = e.toDate().difference(DateTime.now()).inSeconds;
+    print(differenceE / 60 / 60 / 24);
+    print(differenceS);
   }
 
   openQrCode(var snapshot) {
@@ -81,6 +83,7 @@ class _ProductPageState extends State<ProductPage> {
                         elevation: 6.0,
                         child: QrImage(
                           data: '${snapshot.data.id}',
+                          // data: 'asd',
                           version: QrVersions.auto,
                           size: 300.0,
                         ),
